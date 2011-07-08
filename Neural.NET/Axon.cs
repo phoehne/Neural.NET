@@ -104,10 +104,7 @@ namespace Neural
 		/// <value>The id of this axon</value>
 		public Guid Id 
 		{
-			get 
-			{
-				return id;
-			}
+			get;
 		}
     
 		/// <summary>
@@ -117,14 +114,7 @@ namespace Neural
 		/// <value>The dendrite neuron for this axon.</value>
 		public Neuron Dendrite 
 		{
-			get 
-			{
-				return dendrite;
-			}
-			set 
-			{
-				dendrite = value;
-			}
+			get; set;
 		}
 
 		/// <summary>
@@ -135,14 +125,7 @@ namespace Neural
 		/// <value>The base of the axon or the source neuron.</value>
 		public Neuron Base 
 		{
-			get 
-			{
-				return baseNeuron;
-			}
-			set 
-			{
-				baseNeuron = value;
-			}
+			get; set;
 		}
     
 		/// <summary>
