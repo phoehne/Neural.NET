@@ -1,0 +1,2632 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Neural.NET</name>
+    </assembly>
+    <members>
+        <member name="T:Neural.NetworkBuilder">
+            <summary>
+            Summary description for NetworkBuilder.
+            </summary>
+        </member>
+        <member name="M:Neural.NetworkBuilder.AddHiddenLayer(System.Int32)">
+            Adds a hidden layer to build with the given size.
+            @param size The size of the hidden layer.
+        </member>
+        <member name="M:Neural.NetworkBuilder.AddInputNeuron(System.String)">
+            Adds an input neuron to the builder.
+            @param name The name of the input neuron.
+        </member>
+        <member name="M:Neural.NetworkBuilder.AddInputNeurons(System.Collections.ArrayList)">
+            Adds a list of input neurons to the network builder.
+            @param neurons The list of neurons.
+        </member>
+        <member name="M:Neural.NetworkBuilder.AddOutputNeuron(System.String)">
+            Adds an output neuron to the builder.
+            @param name The name of the output neuron.
+        </member>
+        <member name="M:Neural.NetworkBuilder.AddOutputNeurons(System.Collections.ArrayList)">
+             Adds a list of output neurons to the builder.
+            
+             @param neurons The list of neurons.
+        </member>
+        <member name="M:Neural.NetworkBuilder.BuildNetwork">
+            Build a network.  This method causes the network builder to build a fully
+            connected, feed-forward neural network.
+            @return A constructed network.
+        </member>
+        <member name="P:Neural.NetworkBuilder.Sizes">
+            Return the sizes of the layers of the network to build
+            @return The sizes of the network's layers.
+        </member>
+        <member name="P:Neural.NetworkBuilder.ActivationFactory">
+            Sets the factory that will create activation functions, therefore
+            building the network with the desired activation function.
+            @param factory The activation factory.
+        </member>
+        <member name="T:Neural.Data.RangeScaler">
+            <summary>
+            Scales a value that falls within a certain range, given by the min 
+            and max value to a 0..1 range.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.Scaler">
+            <summary>
+            The scaler is an abstract class and a parent to the other scalers.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.Scaler.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="F:Neural.Data.Scaler.composite">
+            <summary>
+            The next type of scaling to engage in.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.Scaler.Scale(System.Double)">
+            <summary>
+            The abstract scaling method to implement.
+            </summary>
+            <param name="input">The value to scale</param>
+            <returns>The scaled value</returns>
+        </member>
+        <member name="M:Neural.Data.Scaler.AddScaler(Neural.Data.Scaler)">
+            <summary>
+            Chaines another scaler to this scaler.
+            </summary>
+            <param name="scaler">Another scaler</param>
+        </member>
+        <member name="M:Neural.Data.RangeScaler.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.RangeScaler.Scale(System.Double)">
+            <summary>
+            Scale the value to a 0..1 range.
+            </summary>
+            <param name="input">The unscaled value</param>
+            <returns>The scaled value</returns>
+        </member>
+        <member name="P:Neural.Data.RangeScaler.Min">
+            <summary>
+            The minimum value of the range to scale.
+            </summary>
+        </member>
+        <member name="P:Neural.Data.RangeScaler.Max">
+            <summary>
+            The maximum value of the range to scale.
+            </summary>
+        </member>
+        <member name="T:Neural.Activation.SigmoidActivationFactory">
+            <summary>
+            Summary description for SigmoidActivationFactory.
+            </summary>
+        </member>
+        <member name="T:Neural.ActivationFactory">
+            <summary>
+            The activation factory interface.  Used by activation factories when building
+            networks.
+            </summary>
+        </member>
+        <member name="M:Neural.ActivationFactory.MakeFunction">
+            <summary>
+            Makes a  new activation function.
+            </summary>
+            <returns>The constructed activation function.</returns>
+        </member>
+        <member name="M:Neural.Activation.SigmoidActivationFactory.#ctor">
+            <summary>
+            Create a new sigmoid activation factory.
+            </summary>
+        </member>
+        <member name="M:Neural.Activation.SigmoidActivationFactory.MakeFunction">
+            <summary>
+            Creates a new sigmoid activation function.
+            </summary>
+            <returns>A new activation function</returns>
+        </member>
+        <member name="T:Neural.Managers.DataStorageTag">
+            <summary>
+            The data storage tag contains book keeping information about the object
+            stored, such as creation time.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.DataStorageTag.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Neural.Managers.DataStorageTag.Description">
+            <summary>
+            The description for this data storage tag.
+            </summary>
+        </member>
+        <member name="P:Neural.Managers.DataStorageTag.CreateDate">
+            <summary>
+            Returns the date this vault item was created.
+            </summary>
+        </member>
+        <member name="P:Neural.Managers.DataStorageTag.Item(System.String)">
+            <summary>
+            Adds a feature to the meta-data.  Note this is any kind of serializable object.
+            </summary>
+        </member>
+        <member name="T:Neural.Network">
+            <summary>
+            Summary description for Network.
+            </summary>
+        </member>
+        <member name="M:Neural.Network.#ctor">
+            <summary>
+            Create a new instance of a network.  By default a bias node
+            is added to the network and automatically connected to any
+            neurons added to the network (except input neurons).
+            </summary>
+        </member>
+        <member name="M:Neural.Network.AddOutputNeuron(Neural.Neuron)">
+            <summary>Add output neuron.</summary>
+            <param name="neuron">The output neuron</param>
+        </member>
+        <member name="M:Neural.Network.AddInputNeuron(Neural.Neuron)">
+            <summary>
+            Add input neuron.  Input neurons have their value "set" to a given value
+            and then propagate that value to any neurons they are connected to.
+            </summary>
+            <param name="neuron">The new input neuron</param>
+        </member>
+        <member name="M:Neural.Network.AddInternalNeuron(Neural.Neuron)">
+            <summary>
+            Adds a "hidden layer" neuron.  Hidden layers get their inputs from either
+            input neurons or other hidden layers.  They then pass those values to the
+            next output or hidden layer.
+            </summary>
+            <param name="neuron">The new neuron to add</param>
+        </member>
+        <member name="M:Neural.Network.ConnectToBias(Neural.Neuron)">
+            <summary>
+            Connect a neuron to the bias neuron.
+            </summary>
+            <param name="neuron">The bias neuron</param>
+        </member>
+        <member name="M:Neural.Network.Connect(System.String,System.String)">
+            <summary>
+            Connect two nuerons by their name.  This method is used to
+            build up connections within the network.  The only connection established
+            by default is the connection to the bias node.  This is the
+            preferred method.
+            </summary>
+            <param name="baseNeuron">The name of the base neuron to connect</param>
+            <param name="dendrite">The name of the dendrite neuron to connect</param>
+        </member>
+        <member name="M:Neural.Network.Connect(Neural.Neuron,Neural.Neuron)">
+            <summary>
+            Connect two neurons.  This method is used to
+            build up connections within the network.  The only connection established
+            by default is the connection to the bias node.
+            </summary>
+            <param name="baseNeuron">A base neuron to connect</param>
+            <param name="dendrite">A dendrite neuron to connect</param>
+        </member>
+        <member name="M:Neural.Network.AddNeuron(Neural.Neuron)">
+            <summary>
+            Add a neuron to the network.  If a neuron with the same name has
+            already been added to the network, a <code>DuplicateNeuronException</code>
+            is thrown.  This need not be the same neuron, but all neurons that
+            are part of this network must have unique names, with respect to
+            the network.
+            </summary>
+            <param name="neuron">The neuron to add</param>
+        </member>
+        <member name="M:Neural.Network.Process(System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Process a set of inputs and return a result.  The method checks to
+            see that the names in the input map correspond to the names of the input
+            neurons.  If they do not match, an <code>InvalidInputsException</code>
+            is thrown.  It returns a map with the output values keyed on the names
+            of the output neurons.
+            </summary>
+            <param name="inputs">The inputs to the network</param>
+            <returns>The processed result</returns>
+        </member>
+        <member name="M:Neural.Network.getTrainer(System.String)">
+            <summary>
+            Returns the trainer attached to this network.  A trainer configures
+            the network for training on a given method or algorithm.
+            </summary>
+            <param name="neuronId">The neuron trainer for the named neuron</param>
+            <returns>The neuron trainer used by a given neuron</returns>
+        </member>
+        <member name="M:Neural.Network.SetFeedback(System.Collections.Generic.Dictionary{System.String,System.Double},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            During training a network is presented the actual and expected values
+            for a given input.  Based on this, the network back-propagates the errors
+            and by the derivative chaining rule, calculates the weight adjustments
+            necessary to train the network, given the trainer.
+            </summary>
+            <param name="actual">The actual values obtained from executing the network</param>
+            <param name="expected">The expected values from a training example</param>
+        </member>
+        <member name="M:Neural.Network.BeginTraining(Neural.Trainer)">
+            <summary>
+            Attaches a trainer to the network and establishes any necessary structures
+            for training.
+            </summary>
+            <param name="trainer">The trainer that will perform the training</param>
+        </member>
+        <member name="M:Neural.Network.EndTraining">
+            <summary>
+            Completes the training by removing training structures from the
+            network.
+            </summary>
+        </member>
+        <member name="M:Neural.Network.AdjustWeights">
+            <summary>
+            Called during training to periodically adjust the weights
+            on the network.
+            </summary>
+        </member>
+        <member name="M:Neural.Network.UpdateAdjustments">
+            <summary>
+            Updates the weight adjustments for all the neurons in the network.  Note that
+            this is not the same as updating the weights.  This just calculates the
+            change in the weight.
+            </summary>
+        </member>
+        <member name="P:Neural.Network.Item(System.String)">
+            <summary>
+            Indexer to acces individual neurons.
+            </summary>
+        </member>
+        <member name="P:Neural.Network.NueronNames">
+            <summary>
+            Returns the names of all the neurons.
+            </summary>
+        </member>
+        <member name="P:Neural.Network.ValidateInputs">
+            <summary>
+            Shut off validating the input keys during production runs.
+            Can save some time.
+            </summary>
+        </member>
+        <member name="P:Neural.Network.ActivationFactory">
+            <summary>
+            Set the activation factory which will create new activation functions.
+            </summary>
+            <value>factory The activation factory.</value>
+        </member>
+        <member name="T:Neural.Pocket">
+            <summary>
+            Summary description for Pocket.
+            </summary>
+        </member>
+        <member name="M:Neural.Pocket.#ctor(System.String)">
+            Creates a new instance of Pocket 
+        </member>
+        <member name="M:Neural.Pocket.AddError(System.String)">
+            <summary>
+            Adds a new error to monitor in the pocket.
+            </summary>
+            <param name="error">The name of the error</param>
+        </member>
+        <member name="M:Neural.Pocket.CloseError(System.String)">
+            
+             Closes named error, cleaning up the pocket.
+            
+             @param error The name of the error.
+            
+        </member>
+        <member name="M:Neural.Pocket.GetContents(System.String)">
+            
+             Returns the contents of the pocket or null if there is no network in
+             the pocket.
+             @param error The name of the error.
+             @return The network.
+            
+        </member>
+        <member name="M:Neural.Pocket.GetLastUpdateEpoch(System.String)">
+            
+             Return the epoch the pocket was updated.  A -1 is returned if there is
+             no network in the pocket.
+             @param error The name of the error.
+             @return The epoch number.
+            
+        </member>
+        <member name="M:Neural.Pocket.GetLastUpdateError(System.String)">
+            
+             Returns the last update error for the network in the pocket or the 
+             MAX_VALUE of double if there is no network in the pocket.
+             @param error The name of the error.
+             @return The error.
+            
+        </member>
+        <member name="M:Neural.Pocket.GetErrors">
+            
+             Returns the names of the errors that are managed the this pocket.
+             @return The list of error names.
+            
+        </member>
+        <member name="M:Neural.Pocket.SaveNetwork(System.String,Neural.Network,Neural.Trainer)">
+            
+             Save the network to the pocket with the named error calculator.
+             @param error The name of the error.
+             @param network The network to save.
+             @param trainer The trainer training the network.
+            
+        </member>
+        <member name="T:Neural.ExampleSetException">
+            <summary>
+            Raised by the example set, if there is a problem.
+            </summary>
+        </member>
+        <member name="M:Neural.ExampleSetException.#ctor(System.String)">
+            <summary>
+            Creates a new example set exception.
+            </summary>
+            <param name="message">The message</param>
+        </member>
+        <member name="T:Neural.Data.NMinusOneClassTranslator">
+            <summary>
+            Translates values into N-1 classes.  For example, three distinct values
+            are translated into two output values (where { 0.0, 0.0 } is the third 
+            class.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.Translator">
+            <summary>
+            Translator is the base class for translators, which take strings
+            and translate them.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.Translator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="F:Neural.Data.Translator.keys">
+            <summary>
+            The allowable classes to translate.
+            </summary>
+        </member>
+        <member name="F:Neural.Data.Translator.columns">
+            <summary>
+            The column names.  Not used?
+            </summary>
+        </member>
+        <member name="M:Neural.Data.Translator.Translate(System.String)">
+            <summary>
+            The abstract translation function.  Subclasses will take a string value
+            and translate it into some combination of double values, returned as an
+            array.
+            </summary>
+            <param name="values">The raw string</param>
+            <returns>The values</returns>
+        </member>
+        <member name="M:Neural.Data.Translator.AddKey(System.String)">
+            <summary>
+            Adds a new key to translate - note that all necessary keys must be
+            defined in the translator.  Any values that are not defined, will
+            generate a TranslatorException.  The order in which the keys are
+            added is important, but dependant on the type of translation
+            accomplished.
+            </summary>
+            <param name="keyName">The name of the class to translate</param>
+        </member>
+        <member name="P:Neural.Data.Translator.OutputSize">
+            <summary>
+            Abstract method that returns the size of an encoded class.
+            </summary>
+            <returns>The size of the return tags</returns>
+        </member>
+        <member name="M:Neural.Data.NMinusOneClassTranslator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.NMinusOneClassTranslator.Translate(System.String)">
+            <summary>
+            The N-1 translator returns N-1 doubles for N possible strings.  For
+            example, if the strings are { "car", "plane", "train", "boat" } then
+            there are 4 possible strings of 3 values { 0.0, 0.0, 0.0 } for "car",
+            { 1.0, 0.0, 0.0 } for "plane", { 0.0, 1.0, 0.0 } for "traine", and
+            { 0.0, 0.0, 1.0 } for "boat".  If an unexpected string is entered,
+            "rocket", for example, then an exception is thrown.
+            </summary>
+            <param name="values">The string to be translated</param>
+            <returns>The array representing this string</returns>
+        </member>
+        <member name="P:Neural.Data.NMinusOneClassTranslator.OutputSize">
+            <summary>
+            Returns the output size of the translator.
+            </summary>
+        </member>
+        <member name="T:Neural.Calculators.SSEErrorCalculator">
+            <summary>
+            Sum of squares error calculator.
+            </summary>
+        </member>
+        <member name="T:Neural.ErrorCalculator">
+            <summary>
+            The error calculation interface.  Error calculators will implement this interface.
+            </summary>
+        </member>
+        <member name="M:Neural.ErrorCalculator.CalculateError(System.Collections.Generic.Dictionary{System.String,System.Double},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Calculates the error based on the expected and actual values.
+            </summary>
+            <param name="expected">The expected values from training</param>
+            <param name="actual">The actual values produced by the network</param>
+            <returns>The error measure</returns>
+        </member>
+        <member name="P:Neural.ErrorCalculator.DefaultName">
+            <summary>
+            If no name is provided when registering the error calculator, this will be its name.
+            </summary>
+        </member>
+        <member name="M:Neural.Calculators.SSEErrorCalculator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Calculators.SSEErrorCalculator.CalculateError(System.Collections.Generic.Dictionary{System.String,System.Double},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Calculates the contribution of this element to the sum of squared errors (SSE).
+            This is diffrent from the MSE, in that the SSE does not average the error
+            over the number of elements.
+            </summary>
+            <param name="expected">The expected values</param>
+            <param name="actual">The actual values</param>
+            <returns>The contribution of the element to the SSE</returns>
+        </member>
+        <member name="P:Neural.Calculators.SSEErrorCalculator.DefaultName">
+            <summary>
+            Returns the default name for this error calculator.
+            </summary>
+        </member>
+        <member name="T:Neural.Activation.TanhActivationFactory">
+            <summary>
+            Summary description for TanhActivationFactory.
+            </summary>
+        </member>
+        <member name="M:Neural.Activation.TanhActivationFactory.#ctor">
+            <summary>
+            Create a new Tanh Activation factory
+            </summary>
+        </member>
+        <member name="M:Neural.Activation.TanhActivationFactory.MakeFunction">
+            <summary>
+            This method creates a new Tanh activation function.
+            </summary>
+            <returns>A tanh activation function</returns>
+        </member>
+        <member name="T:Neural.Managers.InputDataManager">
+            <summary>
+            Maintains a repository of input data.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.#ctor">
+            <summary>
+            Creates a new instance of InputDataManager.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.GetManager">
+            <summary>
+            Returns the input data manager.
+            </summary>
+            <returns>The input data manager</returns>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.AddInputData(System.Collections.ArrayList,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Adds data to the manager.
+            </summary>
+            <param name="data">The data to store</param>
+            <param name="name">The name of the data file</param>
+            <param name="tag">The data storage tag</param>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.AddInputData(System.Collections.ArrayList,System.String)">
+            <summary>
+            Adds data to the data manager.
+            </summary>
+            <param name="data">The data to manage</param>
+            <param name="name">The name of the data file</param>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.CleanVault">
+            <summary>
+            Cleans the vault.
+            </summary>   
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.getInputData(System.String)">
+            <summary>
+            Returns the data set.
+            </summary>
+            <param name="name">The name of the data set</param>
+            <returns>The data set</returns>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.GetStorageTag(System.String)">
+            <summary>
+            Returns the data storage tag.
+            </summary>
+            <param name="name">The name of the data set</param>
+            <returns>The data storage tag</returns>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.ListDataSets">
+            <summary>
+            Lists the data sets in the vault.
+            </summary>
+            <returns>The data sets in the vault</returns>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.UpdateDataSet(System.Collections.ArrayList,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Updates the given data set and the storage tag.
+            </summary>
+            <param name="data">The data set</param>
+            <param name="name">The name of the data set</param>
+            <param name="tag">The data storage tag</param>
+        </member>
+        <member name="M:Neural.Managers.InputDataManager.UpdateDataSet(System.Collections.ArrayList,System.String)">
+            <summary>
+            Saving the data set without modifying the storage tag.
+            </summary>
+            <param name="data">The data</param>
+            <param name="name">The name of the data set</param>
+        </member>
+        <member name="P:Neural.Managers.InputDataManager.VaultDirectory">
+            <summary>
+            Returns the vault directory.
+            </summary>
+        </member>
+        <member name="T:Neural.Neuron">
+            <summary>
+            A neuron, along with the axon, is the fundamental building block of the
+            neural network.  Each neuron maintains information about inputs, outputs,
+            and feedback through the neuron.  It is coupled to another neuron through
+            an axon.  Each neuron has a unique id, and no two neurons in the same
+            network can have the same id.
+            </summary>
+        </member>
+        <member name="M:Neural.Neuron.#ctor">
+            <summary>
+            Default constructor.  Sets the default name to a GUID.
+            </summary>
+        </member>
+        <member name="M:Neural.Neuron.#ctor(System.String)">
+            <summary>
+            Constructor - requires a name which needs to be unique for the
+            network.
+            </summary>
+            <param name="name">The name of this neuro</param>
+        </member>
+        <member name="M:Neural.Neuron.AddInputAxon(Neural.Axon)">
+            <summary>
+            Add a new input axon to the neuron.  This will adjust the weights
+            and inputs appropriately.  Since this is normally used in neural
+            construction - it re-randomizes the weights.
+            </summary>
+            <param name="axon">The new input Axon</param>
+        </member>
+        <member name="M:Neural.Neuron.AddOutputAxon(Neural.Axon)">
+            <summary>
+            Adds a new output axon to the neuron.  When the neuron fires,
+            all the output axons are fired with the output value.
+            </summary>
+            <param name="axon">The new axon</param>
+        </member>
+        <member name="M:Neural.Neuron.ReceiveSignal(Neural.Axon,System.Double)">
+            <summary>
+            This receives an input signal from the input axon.  It then
+            initializes the set of missing inputs (if necessary) with the
+            ids of the input axons.  If the axon is one of the axons that
+            has not sent its signal, it is removed from the set of
+            missing axons and the input value is stored.  If the size of the
+            missing input set drops to zero, the output value is calculate,
+            and the neuron is fired.
+            </summary>
+            <param name="firingAxon">The axon sending signal</param>
+            <param name="val">The value firing into this neuron</param>
+        </member>
+        <member name="M:Neural.Neuron.DotProduct(System.Double[],System.Double[])">
+            <summary>
+            Calculates the dot-product of two arrays.
+            </summary>
+            <param name="p1">First array</param>
+            <param name="p2">Second array</param>
+            <returns>The dot-product</returns>
+        </member>
+        <member name="M:Neural.Neuron.SetInput(System.Double)">
+            <summary>
+            If this neuron is an input neuron, then the output value is set
+            by the neural network and the results are propagated to the
+            output axons.
+            </summary>
+            <param name="val">The input value</param>
+        </member>
+        <member name="M:Neural.Neuron.FireNeuron">
+            <summary>
+            Iterates through the set of output axons, sending the output
+            signal.
+            </summary>
+        </member>
+        <member name="M:Neural.Neuron.SetError(System.Double,System.Double)">
+            <summary>
+            Set the error using the actual and expected values.  This 
+            operates on the output nodes.  
+            </summary>
+            <param name="actual">The actual values obtained</param>
+            <param name="expected">The expected values from an example</param>
+        </member>
+        <member name="M:Neural.Neuron.ReceiveFeedback(System.Double,Neural.Axon)">
+            <summary>
+            Receives feedback from subsequent layer neurons.  As error
+            information percolates back, the neuron will calculate its delta
+            and partials.
+            </summary>
+            <param name="source">The axon sending the feedback</param>
+            <param name="val">The feedback value</param>
+        </member>
+        <member name="M:Neural.Neuron.SetNeuralTrainer(Neural.NeuronTraining)">
+            <summary>
+            Set the neuron trainer for this neuron.
+            </summary>
+            <param name="trainer">The neuron trainer</param>
+        </member>
+        <member name="M:Neural.Neuron.GetTrainer">
+            <summary>
+            Returns the affiliated neuron trainer.
+            </summary>
+            <returns>The neuron trainer attached to this neuron</returns>
+        </member>
+        <member name="M:Neural.Neuron.AdjustWeights">
+            <summary>
+            Adjust the weights.
+            </summary>
+        </member>
+        <member name="P:Neural.Neuron.Inputs">
+            <summary>
+            Returns the inputs for this neuron.
+            </summary>
+        </member>
+        <member name="P:Neural.Neuron.Name">
+            <summary>
+            Returns the name of this neuron.
+            </summary>
+        </member>
+        <member name="P:Neural.Neuron.ActivationFunction">
+            <summary>
+            Sets the activation function used by this neuron.  The default
+            activation function is the Sigmoid activation function.  The
+            activation function must implement the ActivationFunction
+            interface.
+            </summary>
+        </member>
+        <member name="P:Neural.Neuron.OutputValue">
+            <summary>
+            Returns the output value for this neuron.  Usually called for
+            output neurons by the neural network.
+            </summary>
+        </member>
+        <member name="P:Neural.Neuron.Weights">
+            <summary>
+            The weight vector for the neuron.
+            </summary>
+        </member>
+        <member name="T:Neural.Managers.NetworkManager">
+            <summary>
+            Manages serialized, trained networks.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.GetManager">
+            <summary>
+            Returns an instance of the network manager.
+            </summary>
+            <returns>The network manager</returns>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.AddNetwork(Neural.Network,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Add a new network to the vault.
+            </summary>
+            <param name="name">The name of the network</param>
+            <param name="network">The network</param>
+            <param name="tag">The storage tag for this network</param>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.addNetwork(Neural.Network,System.String)">
+            <summary>
+            Add a network to the vault, using the default data storage tag.
+            </summary>
+            <param name="name">The name of the network</param>
+            <param name="network">The network</param>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.CleanVault">
+            <summary>
+            Cleans the vault of all networks.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.getNetwork(System.String)">
+            <summary>
+            Returns the named network from the vault.
+            </summary>
+            <param name="name">The name of the network</param>
+            <returns>The network</returns>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.GetStorageTag(System.String)">
+            <summary>
+            Returns the data storage tag for the named network.
+            </summary>
+            <param name="name">The name of the network</param>
+            <returns>The data storage tag</returns>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.ListNetworks">
+            <summary>
+            Lists the networks in the vault.
+            </summary>
+            <returns>A list of the networks in the vault</returns>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.RemoveNetwork(System.String)">
+            <summary>
+            Remove the network from the vault.
+            </summary>
+            <param name="name">The name of the network to remove</param>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.UpdateNetwork(Neural.Network,System.String)">
+            <summary>
+            Update the given network without changing the data storage tag.
+            </summary>
+            <param name="name">The name of the network to update</param>
+            <param name="network">network The network data</param>
+        </member>
+        <member name="M:Neural.Managers.NetworkManager.UpdateNetwork(Neural.Network,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Update the given network and the data storage tag.
+            </summary>
+            <param name="name">The name of the network</param>
+            <param name="network">The network data</param>
+            <param name="tag">The storage tag to update</param>
+        </member>
+        <member name="P:Neural.Managers.NetworkManager.VaultDirectory">
+            <summary>
+            Returns the base directory for the vault.
+            </summary>
+        </member>
+        <member name="T:Neural.Example">
+            <summary>
+            An example is a set of input values combined with their
+            expected values.
+            </summary>
+        </member>
+        <member name="M:Neural.Example.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="P:Neural.Example.Expected">
+            <summary>
+            The expected values.
+            </summary>
+        </member>
+        <member name="P:Neural.Example.Inputs">
+            <summary>
+            The input values.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.KClassTranslator">
+            <summary>
+            Translates a value into one of k classes, using a vector
+            of doubles.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.KClassTranslator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.KClassTranslator.Translate(System.String)">
+            <summary>
+            Translates a string value to a series of double values.  For each
+            expected string value there is a corresponding value.  So, if there
+            are K strings { k1, k2, ... kn } The resulting array of double is size
+            K.  For example,  { "car", "plane", "boat", "train" } is a set of
+            4 doubles where { 1.0, 0.0, 0.0, 0.0 } for "car", { 0.0, 1.0, 0.0, 0.0 }
+            for plane, etc.  If an unexpected string is sent in "rocket", in our
+            example, then an exception is thrown.
+            </summary>
+            <param name="values">The raw string value</param>
+            <returns>An array of doubles which represent the string value</returns>
+        </member>
+        <member name="P:Neural.Data.KClassTranslator.OutputSize">
+            <summary>
+            Returns the output size of the translator.
+            </summary>
+        </member>
+        <member name="T:Neural.Listeners.MaxIterationsListener">
+            <summary>
+            Stops training when the trainer has exceeded the maximum
+            number of iterations.
+            </summary>
+        </member>
+        <member name="M:Neural.Listeners.MaxIterationsListener.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Listeners.MaxIterationsListener.#ctor(System.Int32)">
+            <summary>
+            Constructor that sets the maximum number of iterations.
+            </summary>
+            <param name="val">The maximum number of iterations</param>
+        </member>
+        <member name="M:Neural.Listeners.MaxIterationsListener.EpochEnd(Neural.TrainingEpochEvent)">
+            <summary>
+            Implements the listener interface and handles the end of epoch event.
+            If ther number of training iterations is &gt; the maximum iterations
+            value, then training is stopped.
+            </summary>
+            <param name="evt">The epoch end event</param>
+        </member>
+        <member name="P:Neural.Listeners.MaxIterationsListener.MaxIterations">
+            <summary>
+            The maximum number of iterations.
+            </summary>
+        </member>
+        <member name="T:Neural.DuplicateNeuronException">
+            <summary>
+            Summary description for DuplicateNeuronException.
+            </summary>
+        </member>
+        <member name="M:Neural.DuplicateNeuronException.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.DuplicateNeuronException.#ctor(System.String)">
+            <summary>
+            Constructor that takes a message.
+            </summary>
+            <param name="message">Message is passed to superclass</param>
+        </member>
+        <member name="M:Neural.DuplicateNeuronException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor with originating exception and message.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="excp">The originating exception</param>
+        </member>
+        <member name="T:Neural.ResultSet">
+            <summary>
+            Summary description for ResultSet.
+            </summary>
+        </member>
+        <member name="M:Neural.ResultSet.#ctor">
+            Creates a new instance of ResultSet 
+        </member>
+        <member name="M:Neural.ResultSet.AddResult(Neural.Result)">
+            Add a result to the result set.
+            @param result A new result
+        </member>
+        <member name="P:Neural.ResultSet.Item(System.Int32)">
+            Returns the result at the given index.
+            @param index The index of the result.
+            @return The result.
+        </member>
+        <member name="P:Neural.ResultSet.Count">
+            Returns the size of the result set.
+            @return The size.
+        </member>
+        <member name="T:Neural.Managers.ExampleSetManager">
+            <summary>
+            Manages serialization of example sets.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.#ctor">
+            <summary>
+            Creates a new instance of ExampleSetManager 
+            </summary> 
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.GetManager">
+            <summary>
+            Used to obtain a reference to the example set manager, a singleton in this
+            system.
+            </summary>
+            <returns>The manager</returns>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.ListDataFiles">
+            <summary>
+            Lists the example sets in this vault.
+            </summary>
+            <returns>The list of example sets stored in this vault</returns>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.AddDataFile(Neural.ExampleSet,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Adds a new example set to the vault with the given name and the given
+            storage tag.
+            </summary>
+            <param name="eset">The example set to store</param>
+            <param name="name">The name of the example set</param>
+            <param name="tag">The Data Storage Tag for the example set</param>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.AddDataFile(Neural.ExampleSet,System.String)">
+            <summary>
+            Adds a new example set to the vault.  Calls the <code>addDataFile</code>
+            method with a new empty Data Storage Tag.
+            </summary>
+            <param name="eset">The example set to store</param>
+            <param name="name">The name of the example set</param>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.UpdateDataFile(Neural.ExampleSet,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Updates the given data file and data storage tag.
+            </summary>
+            <param name="eset">The data to update</param>
+            <param name="name">The name of the data set</param>
+            <param name="tag">The data storage tag for the data</param>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.updateDataFile(Neural.ExampleSet,System.String)">
+            <summary>
+            Calls update data file but does not update the data storage tag.
+            </summary>
+            <param name="eset">The example set to update</param>
+            <param name="name">The name of the example set</param>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.getStorageTag(System.String)">
+            <summary>
+            Returns the data storage tage associates with a given example set.
+            </summary>
+            <param name="name">name The name of the example set</param>
+            <returns>The associated data storage tag</returns>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.GetData(System.String)">
+            <summary>
+            Returns the example set for the given name.
+            </summary>
+            <param name="name">The name of the example set</param>
+            <returns>The example set</returns>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.RemoveDataFile(System.String)">
+            <summary>
+            Remove the data file from the vault.
+            </summary>
+            <param name="name">The name of the data file</param>
+        </member>
+        <member name="M:Neural.Managers.ExampleSetManager.CleanVault">
+            <summary>
+            Cleans out the example sets from the vault.
+            </summary>
+        </member>
+        <member name="P:Neural.Managers.ExampleSetManager.VaultDirectory">
+            <summary>
+            Sets the directory for the example set vault.
+            </summary>
+        </member>
+        <member name="T:Neural.Listeners.StopOnErrorListener">
+            <summary>
+            Stops training when the error falls to the given value.
+            </summary>
+        </member>
+        <member name="M:Neural.Listeners.StopOnErrorListener.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Listeners.StopOnErrorListener.#ctor(System.Double)">
+            <summary>
+            Constructor that sets the error threshold.
+            </summary>
+            <param name="val">The error threshold</param>
+        </member>
+        <member name="M:Neural.Listeners.StopOnErrorListener.EpochEnd(Neural.TrainingEpochEvent)">
+            <summary>
+            An implementation of the <CODE>EpochEventListener</CODE> interface.
+            Terminates training once the training error drops below the threshold
+            value.
+            </summary>
+            <param name="evt">The epoch event</param>
+        </member>
+        <member name="P:Neural.Listeners.StopOnErrorListener.ErrorName">
+            <summary>
+            Returns the name of the error to listen to.  This allows
+            multiple stop on error listeners t listend to different
+            errors.
+            </summary>
+        </member>
+        <member name="P:Neural.Listeners.StopOnErrorListener.Error">
+            <summary>
+            Returns the error threshold.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.RealField">
+            <summary>
+            A real valued field.  Essentially just a parsing of the input value.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.Field">
+            <summary>
+            The field for a given input reader.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.Field.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.Field.Process(System.String)">
+            <summary>
+            Abstract process method.  The implementation of this method translates
+            a set of string, read from the data source, into an array of doubles.
+            Normally, a real valued field translates a string value to an array of
+            one double valued number.
+            </summary>
+            <param name="val">The raw string to process</param>
+            <returns>The list of doubles that the given string translates into</returns>
+        </member>
+        <member name="P:Neural.Data.Field.Name">
+            <summary>
+            The field name.  Used to identify the field.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.RealField.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.RealField.Process(System.String)">
+            <summary>
+            Process the input string into a real value.
+            </summary>
+            <param name="val">The unparsed string</param>
+            <returns>The double value.</returns>
+        </member>
+        <member name="T:Neural.Activation.SigmoidActivationFunction">
+            <summary>
+            Implements the sigmoid activation function.
+            </summary>
+        </member>
+        <member name="T:Neural.ActivationFunction">
+            <summary>
+            The activation function inetrface.  Activation functions will implement this interface
+            </summary>
+        </member>
+        <member name="M:Neural.ActivationFunction.Activation(System.Double)">
+            <summary>
+            Calculates the activation value for the network inputs.
+            </summary>
+            <param name="val"> The raw value</param>
+            <returns>The scaled value</returns>
+        </member>
+        <member name="M:Neural.ActivationFunction.Derivative(System.Double)">
+            <summary>
+            Calculates the derivative of the network inputs.
+            </summary>
+            <param name="val">The raw value</param>
+            <returns>The derivative of the transfer function based on that value</returns>
+        </member>
+        <member name="M:Neural.Activation.SigmoidActivationFunction.#ctor">
+            <summary>
+            Default constructor.  Sets the old value to some 
+            unattainable value - to gauranteee recalculation on
+            first run.
+            </summary>
+        </member>
+        <member name="M:Neural.Activation.SigmoidActivationFunction.Recalculate(System.Double)">
+            <summary>
+            Recalculate the output values, if the error has changes.
+            </summary>
+            <param name="val">The current value</param>
+        </member>
+        <member name="M:Neural.Activation.SigmoidActivationFunction.Activation(System.Double)">
+            <summary>
+            Obtain the activation output for the given value, using
+            the sigmoid scaling function.
+            </summary>
+            <param name="val">The value to be scaled</param>
+            <returns>The scaled value</returns>
+        </member>
+        <member name="M:Neural.Activation.SigmoidActivationFunction.Derivative(System.Double)">
+            <summary>
+            Obtain the derivative of the scaled value.
+            </summary>
+            <param name="val">The value to be scaled</param>
+            <returns>The derivative of the sigmoid at that point</returns>
+        </member>
+        <member name="T:Neural.Data.TranslatorException">
+            <summary>
+            Summary description for TranslatorException.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.TranslatorException.#ctor">
+            <summary>
+            Create a new translation exception.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.TranslatorException.#ctor(System.String)">
+            <summary>
+            Create a new translation exception
+            </summary>
+            <param name="message">The message</param>
+        </member>
+        <member name="M:Neural.Data.TranslatorException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create a new translation excetion
+            </summary>
+            <param name="msg">The message</param>
+            <param name="ex">The parent exception.</param>
+        </member>
+        <member name="T:Neural.Activation.TanhActivationFunction">
+            <summary>
+            The Tanh (hyperbolic tangent) activation function.
+            </summary>
+        </member>
+        <member name="M:Neural.Activation.TanhActivationFunction.#ctor">
+            <summary>
+            Create a new Tanh Activation function.
+            </summary>
+        </member>
+        <member name="F:Neural.Activation.TanhActivationFunction.oldValue">
+            <summary>
+            The old value - cached.
+            </summary>
+        </member>
+        <member name="F:Neural.Activation.TanhActivationFunction.oldActivation">
+            <summary>
+            The activation - cached.
+            </summary>
+        </member>
+        <member name="F:Neural.Activation.TanhActivationFunction.oldDerivative">
+            <summary>
+            The derivative cached.
+            </summary>
+        </member>
+        <member name="M:Neural.Activation.TanhActivationFunction.Activation(System.Double)">
+            <summary>
+            Returns the tanh activation.
+            </summary>
+            <param name="val">The value</param>
+            <returns>The activaiton value</returns>
+        </member>
+        <member name="M:Neural.Activation.TanhActivationFunction.Derivative(System.Double)">
+            <summary>
+            Returns the tanh derivative.
+            </summary>
+            <param name="val">The parameter value</param>
+            <returns>The derivative</returns>
+        </member>
+        <member name="M:Neural.Activation.TanhActivationFunction.Recalculate(System.Double)">
+            <summary>
+            Recalculate the activation value and derivative, if necessary.
+            </summary>
+            <param name="val">The value</param>
+        </member>
+        <member name="T:Neural.Managers.PocketManager">
+            <summary>
+            The pocket manager manages a pocket of trained networks.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.PocketManager.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of PocketManager
+            </summary>
+            <param name="error">The name of the error used for the pocket</param>
+            <param name="pocketName">The name of the pocket</param>
+        </member>
+        <member name="M:Neural.Managers.PocketManager.SaveNetwork(Neural.Network,Neural.Trainer)">
+            <summary>
+            Saves the network to the pocket if it has a lower error than
+            the existing version of the network.
+            </summary>
+            <param name="network">The network to add to the pocket</param>
+            <param name="trainer">The trainer training the network</param>
+        </member>
+        <member name="M:Neural.Managers.PocketManager.Cleanup">
+            <summary>
+            Clean up the pocket contents at the end of training.
+            </summary>   
+        </member>
+        <member name="M:Neural.Managers.PocketManager.GetNetwork">
+            <summary>
+            Returns the network from the pocket.
+            </summary>
+            <returns>The network in pocket</returns>
+        </member>
+        <member name="M:Neural.Managers.PocketManager.GetLastUpdateEpoch">
+            <summary>
+            Returns the epoch number when the pocket was last updated.
+            </summary>
+            <returns>The epoch number</returns>
+        </member>
+        <member name="M:Neural.Managers.PocketManager.GetLastUpdateError">
+            <summary>
+            Returns the error of the network in the pocket.
+            </summary>
+            <returns>The error</returns>
+        </member>
+        <member name="T:Neural.Managers.DataReaderManager">
+            <summary>
+            Stores and manages collections of saved data readers.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.#ctor">
+            <summary>
+            Creates a new instance of DataReaderManager
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.getManager">
+            <summary>
+            Returns an instance of the data reader manager.
+            </summary>
+            <returns>The data reader manager</returns>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.AddNetwork(Neural.Data.DataReader,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Add a new data reader to the vault.
+            </summary>
+            <param name="name">The name of the network</param>
+            <param name="reader">The data reader</param>
+            <param name="tag">The storage tag for this network</param>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.AddNetwork(Neural.Data.DataReader,System.String)">
+            <summary>
+            Add a data reader to the vault, using the default data storage tag.
+            </summary>
+            <param name="name">The name of the network</param>
+            <param name="reader">The data reader</param>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.CleanVault">
+            <summary>
+            Cleans the vault of all data readers.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.GetReader(System.String)">
+            <summary>
+            Returns the named data reader from the vault.
+            </summary>
+            <param name="name">The name of the data reader</param>
+            <returns>The data reader</returns>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.GetStorageTag(System.String)">
+            <summary>
+            Returns the data storage tag for the named data reader.
+            </summary>
+            <param name="name">The name of the data reader</param>
+            <returns>The data storage tag</returns>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.ListReaders">
+            <summary>
+            Lists the data readers in the vault.
+            </summary>
+            <returns>A list of the data readers in the vault</returns>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.RemoveReader(System.String)">
+            <summary>
+            Remove the data reader from the vault.
+            </summary>
+            <param name="name">The name of the data reader to remove</param>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.UpdateReader(Neural.Data.DataReader,System.String)">
+            <summary>
+            Update the given data reader without changing the data storage tag.
+            </summary>
+            <param name="name">The name of the data reader to update</param>
+            <param name="reader">The data reader configuration</param>
+        </member>
+        <member name="M:Neural.Managers.DataReaderManager.UpdateReader(Neural.Data.DataReader,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Update the given data reader and the data storage tag.
+            </summary>
+            <param name="name">The name of the network</param>
+            <param name="reader">The data reader configuration</param>
+            <param name="tag">The storage tag to update</param>
+        </member>
+        <member name="P:Neural.Managers.DataReaderManager.VaultDirectory">
+            <summary>
+            Returns the base directory for the vault.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.FileDataReader">
+            <summary>
+            Reads a data set from a file.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.DataReader">
+             <summary>
+            
+             <p>
+             This is an abstract data reader.  A data reader will pull data from
+             some source, like a file or JDBC connection, and return a data set.
+             The input fields are optionally scaled or translated.  For example,
+             a data file with the fields <br/>
+             <code>30, 0.005, green</code><br/>
+             <code>12, 0.006, blue</code><br/>
+             <code>87, 0.002, red</code><br/>
+             Could be translated to:<br/>
+             <code>0.30, 0.5, 0.1, 0.9, 0.1</code><br/>
+             <code>0.12, 0.6, 0.1, 0.1, 0.9</code><br/>
+             <code>0.87, 0.2, 0.9, 0.1, 0.1</code><br/>
+             <br/>
+             The translators handle the changing of text input to numeric input and
+             scalers adjust the range of the numeric input.  The raw input would first
+             be translated to:<br/>
+             <code>30.0, 0.005, 0.0, 1.0, 0.0</code><br/>
+             <code>12.0, 0.006, 0.0, 0.0, 1.0</code><br/>
+             <code>87.0, 0.002, 1.0, 0.0, 0.0</code><br/>
+             <br/>
+             Then it would be scaled to:<br/>
+             <code>0.30, 0.5, 0.1, 0.9, 0.1</code><br/>
+             <code>0.12, 0.6, 0.1, 0.1, 0.9</code><br/>
+             <code>0.87, 0.2, 0.9, 0.1, 0.1</code><br/>
+             </p>
+             <p>
+             Returning a raw list of values, however, would require the user to find
+             a value remembering the position of the value.  For example wieght is the 
+             3rd value, and height is the 17th.  Instead, the result of reading data
+             is returned as a list of maps.  The list preserves the order in which data 
+             was read.  The rows in the list, however, are maps based on name-value 
+             pairs.  The names are taken from the column definitions.
+             </p>
+             <p>
+             The basic operation of the data reader is first to define input columns. 
+             Any translations are defined at this point.  The columns are defined, and
+             any scaling to be applied to raw input values.  The readValues method, 
+             which is implemented in a concrete subclass, returns name value pairs where
+             the name is taken from the column definition.
+             </p>
+            
+             </summary>
+        </member>
+        <member name="M:Neural.Data.DataReader.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="F:Neural.Data.DataReader.fields">
+            <summary>
+            The fields for this data reader.
+            </summary>
+        </member>
+        <member name="F:Neural.Data.DataReader.columns">
+            <summary>
+            The columns for this data reader.
+            </summary>
+        </member>
+        <member name="F:Neural.Data.DataReader.fieldByName">
+            <summary>
+            The fields indexed by name.
+            </summary>
+        </member>
+        <member name="F:Neural.Data.DataReader.columnByName">
+            <summary>
+            The columsn indexed by name.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.DataReader.DefineColumn(System.String,Neural.Data.Scaler)">
+            <summary>
+            Define a new column in the output set with the given name and scaler.
+            </summary>
+            <param name="name">The column name</param>
+            <param name="scaler">The scaler used to transform the column</param>
+        </member>
+        <member name="M:Neural.Data.DataReader.DefineColumn(System.String)">
+            <summary>
+            Define a column in the output set, that does not scale.
+            </summary>
+            <param name="name">The column name</param>
+        </member>
+        <member name="M:Neural.Data.DataReader.DefineRealInputField(System.String)">
+            <summary>
+            Defines a real valued input field in the data set with the given
+            name.
+            </summary>
+            <param name="name">The field name</param>
+        </member>
+        <member name="M:Neural.Data.DataReader.DefineTranslatedInputField(System.String,Neural.Data.Translator)">
+            <summary>
+            Defines a translated input field with the given name.  Normally translated
+            input fields are used for classifiers.  An example is translating a color
+            to a set of K classes uses the KClassTranslator.
+            </summary>
+            <param name="name">The name of the input field</param>
+            <param name="translator">The translator used to modify the value</param>
+        </member>
+        <member name="M:Neural.Data.DataReader.TranslateLine(System.String[])">
+            <summary>
+            Performs translation on a raw line.  When a line is read in from a data
+            source it is parsed into an array of strings.  The array of strings
+            is translated into an array of doubles.
+            </summary>
+            <param name="aLine">The array of strings</param>
+            <returns>The doubles after translating the strings</returns>
+        </member>
+        <member name="M:Neural.Data.DataReader.ScaleLine(System.Double[])">
+            <summary>
+            Performs the scaling on a line translated into doubles.  After a line
+            is read and translated into an array of doubles, it is scaled accordingly.
+            The scaling is defined using the <c>defineColumn</c> method.
+            </summary>
+            <param name="rawLine">The raw double values read in</param>
+            <returns>The scaled double values</returns>
+        </member>
+        <member name="M:Neural.Data.DataReader.ReadValues">
+            <summary>
+            This is an abstract method that is implemented by a particular data reader,
+            for example a JDBC data reader would read from a database.  The result is
+            a list of name-value pairs, where the names are assigned by the column
+            names.
+            </summary>
+            <returns>A list of name-value pairs</returns>
+        </member>
+        <member name="M:Neural.Data.DataReader.NameValues(System.Double[])">
+            <summary>
+            Assigns the name to values.  The data reader's output consists of name-value
+            pairs.  This matches a value to a column name.
+            </summary>
+            <param name="scaledLine">The inputs after scaling</param>
+            <returns>The collection of doubles with their names attached</returns>
+        </member>
+        <member name="M:Neural.Data.FileDataReader.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.FileDataReader.OpenFile">
+            <summary>
+            Attempts to open the file, throwing a file not found exception,
+            if necessary.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.FileDataReader.ReadNextLine">
+            <summary>
+            Reads the next line from the file.  Each time it is called, it reads
+            a new line from the file.  If there are blank lines at the end of the
+            file, a null value is returned.
+            </summary>
+            <returns>The array of read strings</returns>
+        </member>
+        <member name="M:Neural.Data.FileDataReader.ReadValues">
+            <summary>
+            An implementation of <code>DataReader.readValues()</code>.  Reads in the
+            delimited values and returns the data.  If there is a problem, throws
+            a DataReadingException.
+            </summary>
+            <returns>The list of data rows as name-value pairs</returns>
+        </member>
+        <member name="P:Neural.Data.FileDataReader.Delimiter">
+            <summary>
+            The delimiter that separates values.
+            </summary>
+        </member>
+        <member name="P:Neural.Data.FileDataReader.Filename">
+            <summary>
+            The filename to read.
+            </summary>
+        </member>
+        <member name="T:Neural.Managers.ResultSetManager">
+            <summary>
+            Mnaages the serialization of result sets.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.#ctor">
+            <summary>
+            Creates a new instance of ResultSetManager
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.GetManager">
+            <summary>
+            Returns an instance of the result set manager.
+            </summary>
+            <returns>The result set manager</returns>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.AddInputData(Neural.ResultSet,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Adds a result set to the vault with the given storage tag.
+            </summary>
+            <param name="data">The result set</param>
+            <param name="name">The name of throws the result set</param>
+            <param name="tag">The data storage tag</param>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.addInputData(Neural.ResultSet,System.String)">
+            <summary>
+            Add result sets to the vault.
+            </summary>
+            <param name="data">The result set</param>
+            <param name="name">The name of the result set</param>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.CleanVault">
+            <summary>
+            Cleans the results sets from the vault.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.GetInputData(System.String)">
+            <summary>
+            Returns the named result set.
+            </summary>
+            <param name="name">The name of the result set</param>
+            <returns>The result set</returns>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.GetStorageTag(System.String)">
+            <summary>
+            Returns the data storage tag for the result set.
+            </summary>
+            <param name="name">The name of the result set</param>
+            <returns>the Data storage tag</returns>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.ListResultSets">
+            <summary>
+            Lists the result set in the vaults.
+            </summary>
+            <returns>The list of data sets in the vault</returns>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.UpdateDataSet(Neural.ResultSet,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Update the result set in the vault with the given storage tag.
+            </summary>
+            <param name="data">The result set</param>
+            <param name="name">The name of the storage tag</param>
+            <param name="tag">The data storage tag</param>
+        </member>
+        <member name="M:Neural.Managers.ResultSetManager.UpdateDataSet(Neural.ResultSet,System.String)">
+            <summary>
+            Update the data set in the vault with the data and name.
+            </summary>
+            <param name="data">The result set</param>
+            <param name="name">The name of the result set</param>
+        </member>
+        <member name="P:Neural.Managers.ResultSetManager.VaultDirectory">
+            <summary>
+            Returns the vault directory for the result sets.
+            </summary>
+        </member>
+        <member name="T:Neural.Calculators.MSEErrorCalculator">
+            <summary>
+            Mean squared error calculator.
+            </summary>
+        </member>
+        <member name="M:Neural.Calculators.MSEErrorCalculator.#ctor(System.Double)">
+            <summary>
+            Default constructor.  Takes as an argument the number of elements
+            used to calculate the mean.
+            </summary>
+            <param name="sz">The number of elements to average over</param>
+        </member>
+        <member name="M:Neural.Calculators.MSEErrorCalculator.CalculateError(System.Collections.Generic.Dictionary{System.String,System.Double},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Calculated the mean squared error contribution from these expected and
+            actual values.  Note that we calculate the values, divided by the total
+            number of elements, even though we are only looking at one element.  In
+            the error manager, these are summed.  So, we return this element's contribution
+            to the overall error.
+            </summary>
+            <param name="expected">The expected values</param>
+            <param name="actual">The actual values</param>
+            <returns>The contribution to Mean Squared Error</returns>
+        </member>
+        <member name="P:Neural.Calculators.MSEErrorCalculator.DefaultName">
+            <summary>
+            The default name for this error calcualtor.
+            </summary>
+        </member>
+        <member name="T:Neural.EpochEventFunction">
+            <summary>
+            A delegate method to be called when important things happen
+            during the training epoch.
+            </summary>
+        </member>
+        <member name="T:Neural.Trainer">
+            <summary>
+            Summary description for Trainer.
+            </summary>
+        </member>
+        <member name="F:Neural.Trainer.EndEpochDelegates">
+            <summary>
+            The delegates to be called at the end of training.
+            </summary>
+        </member>
+        <member name="F:Neural.Trainer.StartTrainingDelegates">
+            <summary>
+            Called when training is started.
+            </summary>
+        </member>
+        <member name="F:Neural.Trainer.EndPresentationDelegates">
+            <summary>
+            Called when each presentation is finished
+            </summary>
+        </member>
+        <member name="F:Neural.Trainer.PostUpdateDelegates">
+            <summary>
+            Used to notify after an update.
+            </summary>
+        </member>
+        <member name="M:Neural.Trainer.AddCalculator(Neural.ErrorCalculator)">
+            <summary>
+            The error calculator computes the error from the input values
+            and the output values.  By default this is sum of squares.  This
+            version of the addCalculator uses the default name for the 
+            calculator.
+            </summary>
+            <param name="calculator">The calculator to set</param>
+        </member>
+        <member name="M:Neural.Trainer.AddCalculator(System.String,Neural.ErrorCalculator)">
+            <summary>
+            The error calculator computes the error from the input values
+            and the output values.  By default this is the sum of squares.
+            </summary>
+            <param name="name">The name of the error calculator</param>
+            <param name="calculator">The calculator to set</param>
+        </member>
+        <member name="M:Neural.Trainer.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Trainer.Train(Neural.Network)">
+            <summary>
+             <p>
+            Called to train the network.  Iterates until the terminating flag is
+            set.  If there are no training event listeners set then there is a
+            hard termination limit of 10000 (by default) iterations.
+            </p>
+            <p>
+            The training algorithm is simple.  It presents the training examples
+            in order, up to epochSize before ending the epoch.  At that point the
+            error for the epoch is calculated and the EndEpochEvent is sent to all
+            the listeners.  The weights of the network are then adjusted.  Training
+            stops when the hard limit is reached (given no listeners) or by a listener
+            requesting a termination.
+            </p>
+            </summary>
+            <param name="network"></param>
+        </member>
+        <member name="M:Neural.Trainer.UpdateWeightAdjustments">
+            <summary>
+            Causes the weight adjustments to be updated at all the neuron trainers.
+             </summary>
+        </member>
+        <member name="M:Neural.Trainer.UpdateNetwork(Neural.Network)">
+            <summary>
+            Called at the end of an epoch.  In this case it sends the end epoch
+            message to all the neuron trainers.
+            </summary>
+            <param name="network">The network being trained</param>
+        </member>
+        <member name="M:Neural.Trainer.GetTraining">
+            <summary>
+            Returns the default neuron training for this trainer.  It
+            also sets the learning rate as appropriate.
+            </summary>
+            <returns>The neuron trainer used by this trainer.</returns>
+        </member>
+        <member name="M:Neural.Trainer.RequestTermination">
+            <summary>
+            Used primarily by the epoch event listeners to request the
+            neural network to stop training.
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.HardMax">
+            <summary>
+            If no EpochEventListeners are added to the network the hardMax
+            limit is used to safely stop training.
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.LearningRate">
+            <summary>
+            Set the default learning rate used for training.  The default
+            is 0.20.  This is the learning rate passed to all the neuron
+            trainers when they are created.
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.Momentum">
+            <summary>
+            Returns the momentum used during training.  This is the
+            default momentum passed to the neuron trainers when they are
+            created.  The default is 0.00.
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.EpochSize">
+            <summary>
+            The epoch size is the number of examples to present during training
+            before the error is saved and the weights are adjusted.  Normally,
+            this is equal to the size of the training set.
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.TrainingExamples">
+            <summary>
+            The training examples are set of known inputs and their outputs
+            used to train the network.  Normally the data is divided into
+            a training set and a validation set.  The training set is used
+            to train the network while the validation set is used to test
+            the quality of the training.
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.EpochCount">
+            <summary>
+            Returns the epoch count so far
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.ErrorManager">
+            <summary>
+            Returns the error manager used by the trainer when
+            calculating training error.
+            </summary>
+        </member>
+        <member name="P:Neural.Trainer.DefaultErrorName">
+            <summary>
+            Sets the default error name to examine.  If no error is
+            specified, the default error name is used.
+            </summary>
+        </member>
+        <member name="T:Neural.Result">
+            <summary>
+            Summary description for Result.
+            </summary>
+        </member>
+        <member name="M:Neural.Result.#ctor(System.Collections.Hashtable,System.Collections.Hashtable)">
+            Creates a new instance of Result
+            @param inputs The inputs for the result.
+            @param outputs The expected outputs.
+        </member>
+        <member name="P:Neural.Result.Inputs">
+            Returns the inputs for this result.
+            @return The inputs.
+        </member>
+        <member name="P:Neural.Result.Outputs">
+            The outputs for this result
+            @return The expected outputs.
+        </member>
+        <member name="T:Neural.ExampleSet">
+            <summary>
+            An example set is a collection of examples, which can be subdivided,
+            shuffled and manipulated.
+            </summary>
+        </member>
+        <member name="M:Neural.ExampleSet.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.ExampleSet.AddExample(Neural.Example)">
+            <summary>
+            Add a new example to the set.
+            </summary>
+            <param name="example">A new example</param>
+        </member>
+        <member name="M:Neural.ExampleSet.NextExample">
+            <summary>
+            Move to the next example in the example set.  Returns null
+            if the set is empty, and will wrap around when it gets to the
+            end of the set.
+            </summary>
+            <returns>The next example.</returns>
+        </member>
+        <member name="M:Neural.ExampleSet.MakeExamples(System.Collections.Generic.List{System.Collections.Generic.Dictionary{System.String,System.Double}},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            Constructs and example set from data read in as key, value pairs.  takes an
+            array of input keys and ouptut keys to divide the raw data into a set of 
+            inputs and expected values.
+            </summary>
+            <param name="data">A list of name value pairs of raw data</param>
+            <param name="inputs">A list of names of input values</param>
+            <param name="outputs">A list of names of output values</param>
+            <returns>A constructed example set</returns>
+        </member>
+        <member name="M:Neural.ExampleSet.CheckSizeLimits(System.Int32[])">
+            <summary>
+            Checks to see the sizes are less than or equal to the example size.
+            (Used when subidividing the example set.
+            </summary>
+            <param name="sizes">The sizes to segment the data</param>
+        </member>
+        <member name="M:Neural.ExampleSet.DivideRandom(System.Int32[])">
+            <summary>
+            Divide the example set into a number of smaller example sets, with 
+            the sizes given in an array of values.
+            </summary>
+            <param name="sizes">The sizes to divide the result sets</param>
+            <returns>A shuffled subsets of the original example set</returns>
+        </member>
+        <member name="M:Neural.ExampleSet.CheckSizeLimits(System.Double[])">
+            <summary>
+            Checkes the size limits for percentage sizes and throws an exception 
+            when necessary.
+            </summary>
+            <param name="pct">The percentages.</param>
+        </member>
+        <member name="M:Neural.ExampleSet.DivideRandom(System.Double[])">
+            <summary>
+            Divide two example sets randomly, using sizes expressed as a percentage of the total size.
+            The sum total of all the percentages must be less than or equal to 1.0.
+            </summary>
+            <param name="pctSizes">An array of percentages</param>
+            <returns>The example sets with the percent sizes</returns>
+        </member>
+        <member name="M:Neural.ExampleSet.DivideLinear(System.Int32[])">
+            <summary>
+            Divide an example set linearly (by simply iterating), with the given number of elements.
+            The total number of elements for each returned sub-example must be less than or
+            equal to the number of elements in the original example set.
+            </summary>
+            <param name="sizes">The sizes of the sub-sets</param>
+            <returns>A group of example subsets</returns>
+        </member>
+        <member name="M:Neural.ExampleSet.DivideLinear(System.Double[])">
+            <summary>
+            Divide the example sets linearly using the given percentage sizes.  The total sum
+            of the percentages must be less than or equal to 1.0.
+            </summary>
+            <param name="pctSizes">The relative sizes of the subsets</param>
+            <returns>The divided subsets</returns>
+        </member>
+        <member name="M:Neural.ExampleSet.Shuffle">
+            <summary>
+            Randomize the order of the example set.
+            </summary>
+            <returns>A randomized copy of this set.</returns>
+        </member>
+        <member name="M:Neural.ExampleSet.GetEnumerator">
+            <summary>
+            Return the enumerator to provide foreach support.
+            </summary>
+            <returns>The examples enumerator</returns>
+        </member>
+        <member name="P:Neural.ExampleSet.Item(System.Int32)">
+            <summary>
+            Indexer to provide access to the examples in this set.
+            </summary>
+        </member>
+        <member name="P:Neural.ExampleSet.Count">
+            <summary>
+            Returns the number of examples in the example set.
+            </summary>
+        </member>
+        <member name="T:Neural.Calculators.ClassificationErrorCalculator">
+            <summary>
+            Calculates the error given the distance from the actual classification.
+            Uses rounding to determine if the values are both in the same class 
+            or both not in the same class (1.0 == 1.0) if there are in the same class
+            or (0.0 == 0.0) if they are both not in the same class.  
+            </summary>
+        </member>
+        <member name="M:Neural.Calculators.ClassificationErrorCalculator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Calculators.ClassificationErrorCalculator.CalculateError(System.Collections.Generic.Dictionary{System.String,System.Double},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Calculate the error based on the correct or incorrect classification.
+            </summary>
+            <param name="expected">The espected values</param>
+            <param name="actual">The actual values</param>
+            <returns>The classification error</returns>
+        </member>
+        <member name="M:Neural.Calculators.ClassificationErrorCalculator.CountClasses(System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Counts the number of indicated classifications in the
+            result vector.
+            </summary>
+            <param name="resultSet">The result set</param>
+            <returns>The number of indicated classes</returns>
+        </member>
+        <member name="M:Neural.Calculators.ClassificationErrorCalculator.GetClass(System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Returns the name of the max value from the error
+            set.  If two things are in the same class, their max
+            values should be the same.
+            </summary>
+            <param name="resultSet">The result set</param>
+            <returns>The name of the maximum valued attribute</returns>
+        </member>
+        <member name="P:Neural.Calculators.ClassificationErrorCalculator.DefaultName">
+            <summary>
+            The default name of this error calculator.
+            </summary>
+        </member>
+        <member name="T:Neural.Listeners.StopOnClassificationListener">
+            <summary>
+            Stops training when the number of mis-classifications is at or below
+            the designated value.
+            </summary>
+        </member>
+        <member name="M:Neural.Listeners.StopOnClassificationListener.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Neural.Listeners.StopOnClassificationListener.#ctor(System.Double)">
+            <summary>
+            Creates a new listener.
+            </summary>
+            <param name="stopValue">The value that stops training</param>
+        </member>
+        <member name="M:Neural.Listeners.StopOnClassificationListener.#ctor(System.Double,System.String)">
+            <summary>
+            Constructor that takes a stop value and error name.
+            </summary>
+            <param name="stopValue">The maximum number of allowed mis-classifications</param>
+            <param name="errorName">The name of the rror calcualtor</param>
+        </member>
+        <member name="M:Neural.Listeners.StopOnClassificationListener.EpochEnd(Neural.TrainingEpochEvent)">
+            <summary>
+            Implements epoch end listeners.
+            </summary>
+            <param name="evt">The epoch end event</param>
+        </member>
+        <member name="P:Neural.Listeners.StopOnClassificationListener.ErrorName">
+            <summary>
+            Sets the error name for the listener.
+            </summary>
+        </member>
+        <member name="P:Neural.Listeners.StopOnClassificationListener.StopValue">
+            <summary>
+            Returns the number of missclassifications that will stop
+            training.
+            </summary>
+        </member>
+        <member name="T:Neural.Listeners.PocketListener">
+            <summary>
+            A pocket listener saves copies of the network for the
+            given error.
+            </summary>
+        </member>
+        <member name="M:Neural.Listeners.PocketListener.#ctor(Neural.Pocket)">
+            <summary>
+            Creates a new instance of PocketListener
+            </summary>
+            <param name="pocket">The pocket used by this pocket listners</param>
+        </member>
+        <member name="M:Neural.Listeners.PocketListener.EpochEnd(Neural.TrainingEpochEvent)">
+            <summary>
+            Implements the end epoch method.
+            </summary>
+            <param name="evt">The epoch end event</param>
+        </member>
+        <member name="T:Neural.Data.FactorScaler">
+            <summary>
+            Scales a given input value by dividing by a factor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.FactorScaler.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.FactorScaler.#ctor(System.Double)">
+            <summary>
+            Constructor that sets the factor to divide by.
+            </summary>
+            <param name="val">The factor</param>
+        </member>
+        <member name="M:Neural.Data.FactorScaler.Scale(System.Double)">
+            <summary>
+            Sclaes the value by the factor.
+            </summary>
+            <param name="input">The raw input</param>
+            <returns>The scaled input</returns>
+        </member>
+        <member name="P:Neural.Data.FactorScaler.Factor">
+            <summary>
+            The factor for scaling.
+            </summary>
+        </member>
+        <member name="T:Neural.TrainingException">
+            <summary>
+            A training exception is thrown during training to stop due to some unrecoverable error.
+            </summary>
+        </member>
+        <member name="M:Neural.TrainingException.#ctor">
+            <summary>
+            Creates a new training exception
+            </summary>
+        </member>
+        <member name="M:Neural.TrainingException.#ctor(System.String)">
+            <summary>
+            Creates a new trianing exception.
+            </summary>
+            <param name="message">The message</param>
+        </member>
+        <member name="M:Neural.TrainingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new training exception.
+            </summary>
+            <param name="message">The message</param>
+            <param name="excp">The parent exception</param>
+        </member>
+        <member name="T:Neural.TrainingEpochEvent">
+            <summary>
+            This events is passed to the event listeners so they have access to both
+            the trainer and the network, when they are invoked.
+            </summary>
+        </member>
+        <member name="M:Neural.TrainingEpochEvent.#ctor(Neural.Trainer)">
+            <summary>
+            Creates a new training epoch event.
+            </summary>
+            <param name="trainer"></param>
+        </member>
+        <member name="M:Neural.TrainingEpochEvent.#ctor(Neural.Trainer,Neural.Network)">
+            <summary>
+            Creates a new training epoch event.
+            </summary>
+            <param name="trainer">The trainer conducting the trainer</param>
+            <param name="network">The network being trained</param>
+        </member>
+        <member name="P:Neural.TrainingEpochEvent.Network">
+            <summary>
+            The network being trained.  This is sometiems null.
+            </summary>
+        </member>
+        <member name="P:Neural.TrainingEpochEvent.Trainer">
+            <summary>
+            The network trainer.
+            </summary>
+        </member>
+        <member name="T:Neural.InvalidInputsException">
+            <summary>
+            This exception is thrown when the inputs to some part of the system do not
+            match the expected inputs in the sense of wrong type, wrong number of elements,
+            etc..
+            </summary>
+        </member>
+        <member name="M:Neural.InvalidInputsException.#ctor">
+            <summary>
+            Create a new invalid inputs exception.
+            </summary>
+        </member>
+        <member name="M:Neural.InvalidInputsException.#ctor(System.String)">
+            <summary>
+            Create a new invalid inputs exception.
+            </summary>
+            <param name="message">The message</param>
+        </member>
+        <member name="M:Neural.InvalidInputsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new invalid inputs exception.
+            </summary>
+            <param name="message">The message</param>
+            <param name="excp">The parent exception</param>
+        </member>
+        <member name="T:Neural.Evaluator">
+            <summary>
+            Summary description for Evaluator.
+            </summary>
+        </member>
+        <member name="F:Neural.Evaluator.errorList">
+            The error manager responsible for calculating the error
+            values.
+        </member>
+        <member name="M:Neural.Evaluator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Evaluator.AddErrorCalculator(Neural.ErrorCalculator)">
+            <summary>
+            Adds a new error calculator to the evaluator.
+            </summary>
+            <param name="ec">The error calculator</param> 
+        </member>
+        <member name="M:Neural.Evaluator.AddErrorCalculator(Neural.ErrorCalculator,System.String)">
+            <summary>
+            Add an error calculator with the given name, as opposed to the default
+            name of the calculator.
+            </summary>
+            <param name="ec">The error calculator</param>
+            <param name="name">The name of the error calculator</param>
+        </member>
+        <member name="M:Neural.Evaluator.GetError(System.String)">
+            <summary>
+            Return the error for the given name.
+            </summary>
+            <param name="name">The name of the error</param>
+            <returns>The error</returns>
+        </member>
+        <member name="M:Neural.Evaluator.Evaluate(Neural.Network,Neural.ExampleSet)">
+            <summary>
+            Evaluates the network, returning the evaluation of the error.
+            </summary>
+            <param name="examples">The examples to evaluate</param>
+            <param name="network">The network to evalute</param>
+            <returns>An error report for the valuation.</returns>
+        </member>
+        <member name="P:Neural.Evaluator.ErrorNames">
+            <summary>
+            Returns the error names.
+            </summary>
+            <value>The error names</value>
+        </member>
+        <member name="T:Neural.ErrorManager">
+            <summary>
+            Manages collections of error calculators and their output.  Provides
+            summaries of error information known as error reports.
+            </summary>
+        </member>
+        <member name="M:Neural.ErrorManager.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Neural.ErrorManager.AddCalculator(System.String,Neural.ErrorCalculator)">
+            <summary>
+            Adds a new calculator with the given name to the error
+            manager.
+            </summary>
+            <param name="calculator">The calculator to add</param>
+            <param name="name">The name of the calculator</param>
+        </member>
+        <member name="M:Neural.ErrorManager.AccumulateError(System.Collections.Generic.Dictionary{System.String,System.Double},System.Collections.Generic.Dictionary{System.String,System.Double})">
+            <summary>
+            Calculates the error using the available error
+            calculators.  The results are saved into the error
+            report property.
+            </summary>
+            <param name="actual">The actual network output</param>
+            <param name="expected">The expected output</param>
+        </member>
+        <member name="M:Neural.ErrorManager.GetError(System.String)">
+            <summary>
+            Returns the error for a given error calculator.  This
+            takes the error from the error report.  When training
+            is complete this will always report 0, because the
+            error report has been moved to the error history.
+            </summary>
+            <param name="name">The name of the error calculator</param>
+            <returns>The error value.</returns>
+        </member>
+        <member name="M:Neural.ErrorManager.ClearErrors">
+            <summary>
+            Clears the error report, moving it to the error History.
+            </summary>
+        </member>
+        <member name="M:Neural.ErrorManager.GetHistoricalErrors(System.String)">
+            <summary>
+            Returns the error history for a given error calculator.
+            </summary>
+            <param name="name">The name of the error history</param>
+            <returns>The history of errors for the given calculator</returns>
+        </member>
+        <member name="M:Neural.ErrorManager.GetLastError(System.String)">
+            <summary>
+            Returns the last error value for a given calculator.
+            During training the current error value is in the
+            error report, and the latest history is in the last
+            history record.  After training there is only history.
+            </summary>
+            <param name="name">The name of the error calculator</param>
+            <returns>The error value.</returns>
+        </member>
+        <member name="M:Neural.ErrorManager.ListCalculators">
+            <summary>
+            Returns the list of calculator names.  These are all
+            the calculators that have been registered with this
+            error manager.
+            </summary>
+            <returns>The list of error calculators</returns>
+        </member>
+        <member name="M:Neural.ErrorManager.GetCalculator(System.String)">
+            <summary>
+            Returns an error calculator with a given name.
+            </summary>
+            <param name="name">The name of the error calculator</param>
+            <returns>The error calcualtor</returns>    
+        </member>
+        <member name="P:Neural.ErrorManager.Count">
+            <summary>
+            Returns the number of registered calcualtors.
+            </summary>  
+            <value>The number of error calculators</value>
+        </member>
+        <member name="P:Neural.ErrorManager.Report">
+            <summary>
+            Returns the error report, which contains the errors,
+            organized by name.  This is moved to the error history
+            at the end of each epoch during training.
+            </summary>   
+        </member>
+        <member name="P:Neural.ErrorManager.ErrorHistorySize">
+            <summary>
+            Returns the size of the error history.  This may be
+            a specious function, however, the error history may
+            change to a sized window of k error reports, instead
+            of all the error reports.
+            </summary>
+            <value>The sizeof the error history.</value>
+        </member>
+        <member name="P:Neural.ErrorManager.LastErrors">
+            <summary>
+            Returns the last error report in history.  During training
+            this is different from the current error report.  After
+            training there is no current report, just history.
+            </summary>
+            <value>The last error report in the error history.</value>
+        </member>
+        <member name="T:Neural.Data.TranslatedField">
+            <summary>
+            A field that is translated from a set of values.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.TranslatedField.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.TranslatedField.Process(System.String)">
+            <summary>
+            Processes the input value by returning the translated value.
+            </summary>
+            <param name="val">Value as a string</param>
+            <returns>The values represented by the string</returns>
+        </member>
+        <member name="P:Neural.Data.TranslatedField.Translator">
+            <summary>
+            The translator to translate the string.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.OutputField">
+            <summary>
+            An output field for a reader.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.OutputField.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Neural.Data.OutputField.Value">
+            <summary>
+            The value of the output field.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.DataReadingException">
+            <summary>
+            An exception indicating an error during data reading..
+            </summary>
+        </member>
+        <member name="M:Neural.Data.DataReadingException.#ctor(System.String)">
+            <summary>
+            Create a new data reading exception.
+            </summary>
+            <param name="message">The message</param>
+        </member>
+        <member name="M:Neural.Data.DataReadingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create a new data reading exception
+            </summary>
+            <param name="message">The message</param>
+            <param name="baseEx">The parent exception</param>
+        </member>
+        <member name="T:Neural.Data.Column">
+            <summary>
+            Represents a column of read values.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.Column.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Neural.Data.Column.Name">
+            <summary>
+            The name of the column.
+            </summary>
+            <value>The column name</value>
+        </member>
+        <member name="P:Neural.Data.Column.Scaler">
+            <summary>
+            The scaler for this colum.
+            </summary>
+            <value>The column scaler</value>
+        </member>
+        <member name="P:Neural.Data.Column.IsScaling">
+            <summary>
+            Identifies the column as performing scaling.
+            </summary>
+            <value>Inidcates if this column scales values</value>
+        </member>
+        <member name="T:Neural.Axon">
+            <summary>
+            The axon that connects two neurons.
+            </summary>
+            <remarks>
+            An axon connects two neurons and propagates the signal to 
+            the next layer.  It also transports the feedback information
+            during training.
+            </remarks>
+        </member>
+        <member name="M:Neural.Axon.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+            <remarks>
+            Creates a new Axon with a new id.
+            </remarks>
+        </member>
+        <member name="M:Neural.Axon.#ctor(System.Guid)">
+            <summary>
+            Constructor with ID
+            </summary>
+            <remarks>
+            The constructor builds a new Axon with the given ID.
+            </remarks>
+            <param name="id">The axon's id</param>
+        </member>
+        <member name="M:Neural.Axon.Propagate(System.Double)">
+            <summary>
+            Propagates the given signal to the dendrite neuron from the base.
+            It notifies that dendrite neuron that it has fired, by passing
+            itself into the <code>recieveSignal</code> method of the dendrite
+            neuron.
+            </summary>
+            <value>The value to propagate.</value>
+        </member>
+        <member name="M:Neural.Axon.Feedback(System.Double)">
+            <summary>
+            When training feedback is fired from the dendrite neuron back to the
+            base.  This allows the base neuron to adjust its weight accordingly.
+            For middle-tier neurons this consists of the delta * the connecting
+            weight.
+            </summary>
+            <value>The feedback value.</value>
+        </member>
+        <member name="P:Neural.Axon.Id">
+            <summary>
+            An axon id.
+            </summary>
+            <value>The id of this axon</value>
+        </member>
+        <member name="P:Neural.Axon.Dendrite">
+            <summary>
+            Axons have a dendrite, to which they pass values when they 
+            fire and propagate back feedback to the base neuron.
+            </summary>
+            <value>The dendrite neuron for this axon.</value>
+        </member>
+        <member name="P:Neural.Axon.Base">
+            <summary>
+            Returns the base of the Axon.  The base is the neuron that will fire
+            into this axon, sending the signal to the dendrite.  When an
+            axon carries a signal, it does so from the base to the dendrite.
+            </summary>
+            <value>The base of the axon or the source neuron.</value>
+        </member>
+        <member name="T:Neural.NeuronTraining">
+            <summary>
+            Neuron training assists the trainer at the level of the individual
+            neuron.
+            </summary>
+        </member>
+        <member name="M:Neural.NeuronTraining.SetSize(System.Int32)">
+            <summary>
+            Sizes the arrays for the weight adjustmets, etc.  Normally,
+            this is the size of the inputs to the attached neuron.
+            </summary>
+            <param name="sz">The size (in inputs) of the neuron to train</param>
+        </member>
+        <member name="M:Neural.NeuronTraining.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.NeuronTraining.CalculateDelta(System.Double,System.Double,System.Double)">
+            <summary>
+            Calculates the delta given the expected values, the actual values
+            and the derivative of the activation value.
+            </summary>
+            <param name="actual">The actual value</param>
+            <param name="derivative">The derivative of the activation</param>
+            <param name="expected">The expected value</param>
+            <returns>The delta value</returns>
+        </member>
+        <member name="M:Neural.NeuronTraining.CalculateDelta(System.Double[],System.Double)">
+            <summary>
+            Calcuates the delta given the deltas of the subsequent layers and the
+            weight connecting this neuron to the next neuron.  This is used on internal
+            or "hidden" neurons to back propagate the error.  Normally this is defined
+            as the Sum of the delta[i] * weight[i] for the i-th connection from this
+            neuron to the next layer.  We pre-multiply the delta and weight when we
+            back-propagate the feedback and therefore we need only sum it.
+            </summary>
+            <param name="derivative">The derivative of the activation</param>
+            <param name="feedback">The feedback (delta and connecting weight)</param>
+            <returns>The delta value</returns>
+        </member>
+        <member name="M:Neural.NeuronTraining.ClearPartials">
+            <summary>
+            Clears the partial derivatives, called after weights are adjusted.
+            </summary>
+        </member>
+        <member name="M:Neural.NeuronTraining.CalculatePartials(System.Double[],System.Double)">
+            <summary>
+            Initializes the partials, if necessary.  Calculates the partials
+            by summing them.  During an epoch the partial derivatives are cumulative.
+            For on-line training, they are recalculated with ever input.
+            </summary>
+            <param name="delta">The calculated delta for this neuron</param>
+            <param name="inputs">The inputs for this training example</param>
+        </member>
+        <member name="M:Neural.NeuronTraining.UpdateWeightAdjustments">
+            <summary>
+            Updates the weight adjustments.  The weights are passed in only for
+            the size.  Could be changed to an int parameter.  Could also pre-
+            size the weight adjustment array size earlier.  Also stores off
+            the prior weight adjustents
+            </summary>
+        </member>
+        <member name="M:Neural.NeuronTraining.EndEpoch">
+            <summary>
+            Called to end the epoch.  Clears the partial derivatives.
+            </summary>
+        </member>
+        <member name="M:Neural.NeuronTraining.AdjustWeights(System.Double[])">
+            <summary>
+            Called to adjust the weights.  Used the weight adjustments to update
+            the weights passed in by reference.
+            </summary>
+            <param name="weights">The weights to adjust</param>
+        </member>
+        <member name="P:Neural.NeuronTraining.Trainer">
+            <summary>
+            The trainer that owns this neuron trainer.  Neuron trainers are children
+            of trainers, much the same way that neurons are the children of networks.
+            </summary>
+        </member>
+        <member name="P:Neural.NeuronTraining.WeightAdjustments">
+            <summary>
+            Return the weight adjustments.
+            </summary>
+        </member>
+        <member name="P:Neural.NeuronTraining.PriorWeightAdjustments">
+            <summary>
+            Read only copy of the prior weight adustments.
+            </summary>
+        </member>
+        <member name="P:Neural.NeuronTraining.PartialDerivatives">
+            <summary>
+            Returns the partial derivatives.
+            </summary>
+        </member>
+        <member name="P:Neural.NeuronTraining.LearningRate">
+            <summary>
+            The learning rate used by this Neuron trainer.  Currently
+            all neuron trainers attached to a given trainer use the same
+            rate, but that may change in the future.
+            </summary>
+        </member>
+        <member name="P:Neural.NeuronTraining.Momentum">
+            <summary>
+            The momentum coefficient used to calculate the weight change.
+            </summary>
+        </member>
+        <member name="P:Neural.NeuronTraining.Partials">
+            <summary>
+            Return the partial derivatives.  This function seems pretty
+            useless.
+            </summary>
+        </member>
+        <member name="P:Neural.NeuronTraining.WeightUpdates">
+            <summary>
+            Returns the weight updates - anther specious function.
+            </summary>
+        </member>
+        <member name="T:Neural.Managers.GenericManager">
+            <summary>
+            The generic manager is a delegate for the particular managers.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.#ctor">
+            <summary>
+            Default Constructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.AddObject(System.Object,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Add a managed object, passing in the object, the storage tag and the object
+            name as a string.
+            </summary>
+            <param name="name">The name used to identify the object</param>
+            <param name="obj">The object</param>
+            <param name="tag">The data storage tab</param>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.AddObject(System.Object,System.String)">
+            <summary>
+            Add an object to be managed by the manager, passing in the object and the
+            name.  The data storage tag is the default data storage tag.
+            </summary>
+            <param name="name">The name of the object</param>
+            <param name="obj">The object to maange</param>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.CleanVault(System.String)">
+            <summary>
+            Cleans out the vault for the given file extension.
+            </summary>
+            <param name="extension">The file extension to remove</param>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.GetObject(System.String)">
+            <summary>
+            Return an object from the vault.
+            </summary>
+            <param name="name">The name of the object</param>
+            <returns>The object</returns>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.GetStorageTag(System.String)">
+            <summary>
+            Returns the data storage tag for this object.
+            </summary>
+            <param name="name">The name of the object</param>
+            <returns>The data storage tag</returns>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.ListFilenames">
+            <summary>
+            Lists the names of the stored objects.
+            </summary>
+            <returns>The list of stored objects</returns>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.RemoveFile(System.String)">
+            <summary>
+            Removes the object from the vault.
+            </summary>
+            <param name="name">The name of the object</param>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.UpdateFile(System.String,System.Object)">
+            <summary>
+            Update the object with the given name.
+            </summary>
+            <param name="data">The object data</param>
+            <param name="name">The name of the object to update</param>
+        </member>
+        <member name="M:Neural.Managers.GenericManager.UpdateFile(System.Object,Neural.Managers.DataStorageTag,System.String)">
+            <summary>
+            Update the file with the given name, with new data storage tag and new data.
+            </summary>
+            <param name="data">The object data</param>
+            <param name="name">The name of the data object</param>
+            <param name="tag">The storage </param>
+        </member>
+        <member name="P:Neural.Managers.GenericManager.Extension">
+            <summary>
+            Sets the file extension of the type of data to be stored.  Multiple types of
+            files can share the same vault - but must have different extensions.
+            </summary>
+        </member>
+        <member name="P:Neural.Managers.GenericManager.VaultDirectory">
+            <summary>
+            Returns the vault directory.
+            </summary>
+        </member>
+        <member name="T:Neural.Data.ClassificationScaler">
+            <summary>
+            Scales classification values to a given interval.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.ClassificationScaler.#ctor">
+            <summary>
+            Default contructor.
+            </summary>
+        </member>
+        <member name="M:Neural.Data.ClassificationScaler.#ctor(System.Double,System.Double)">
+            <summary>
+            Constructor that specifies a range for the scaling.
+            </summary>
+            <param name="min">The minimum value for the scale</param>
+            <param name="max">The maximum value for the scale</param>
+        </member>
+        <member name="M:Neural.Data.ClassificationScaler.Scale(System.Double)">
+            <summary>
+            Scales the input value.  Given an input value scales it to the appropriate
+            response.  Overrides the abstract method on Scaler.
+            </summary>
+            <param name="input">The unscaled input value</param>
+            <returns>The scaled value</returns>
+        </member>
+        <member name="P:Neural.Data.ClassificationScaler.MaxScale">
+            <summary>
+            The maximum value for the scale.
+            </summary>
+        </member>
+        <member name="P:Neural.Data.ClassificationScaler.MinScale">
+            <summary>
+            The minimum value for the scale.
+            </summary>
+        </member>
+    </members>
+</doc>

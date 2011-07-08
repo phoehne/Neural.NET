@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/20455/Neural.NET/Calculators
+END
+SSEErrorCalculator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/20455/Neural.NET/Calculators/SSEErrorCalculator.cs
+END
+ClassificationErrorCalculator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/20455/Neural.NET/Calculators/ClassificationErrorCalculator.cs
+END
+MSEErrorCalculator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/20455/Neural.NET/Calculators/MSEErrorCalculator.cs
+END

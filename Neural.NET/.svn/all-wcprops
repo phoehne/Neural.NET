@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/20948/Neural.NET
+END
+Result.cs
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/20948/Neural.NET/Result.cs
+END
+DuplicateNeuronException.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/20455/Neural.NET/DuplicateNeuronException.cs
+END
+PublicInterfaces.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/20455/Neural.NET/PublicInterfaces.cs
+END
+Neural.NET.csproj.user
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/20399/Neural.NET/Neural.NET.csproj.user
+END
+ErrorManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/20894/Neural.NET/ErrorManager.cs
+END
+Pocket.cs
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/20455/Neural.NET/Pocket.cs
+END
+ExampleSetException.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/20455/Neural.NET/ExampleSetException.cs
+END
+Network.cs
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/20455/Neural.NET/Network.cs
+END
+ResultSet.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/20948/Neural.NET/ResultSet.cs
+END
+TrainingException.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/20455/Neural.NET/TrainingException.cs
+END
+Example.cs
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/20455/Neural.NET/Example.cs
+END
+AssemblyInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/20455/Neural.NET/AssemblyInfo.cs
+END
+TrainingEpochEvent.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/20455/Neural.NET/TrainingEpochEvent.cs
+END
+NetworkBuilder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/20455/Neural.NET/NetworkBuilder.cs
+END
+NeuronTraining.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/20455/Neural.NET/NeuronTraining.cs
+END
+Evaluator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/20894/Neural.NET/Evaluator.cs
+END
+documentation.xml
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/20894/Neural.NET/documentation.xml
+END
+Trainer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/20455/Neural.NET/Trainer.cs
+END
+Axon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/20455/Neural.NET/Axon.cs
+END
+Neuron.cs
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/20455/Neural.NET/Neuron.cs
+END
+Neural.NET.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/20399/Neural.NET/Neural.NET.csproj
+END
+ExampleSet.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/20455/Neural.NET/ExampleSet.cs
+END
+InvalidInputsException.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/20455/Neural.NET/InvalidInputsException.cs
+END
