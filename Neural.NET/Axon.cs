@@ -72,8 +72,7 @@ namespace Neural
 	public class Axon
 	{
 		private Guid id = Guid.NewGuid();
-		private Neuron baseNeuron;
-		private Neuron dendrite;
+        private Neuron dendrite = null;
     
 		/// <summary>
 		/// Default constructor
@@ -104,7 +103,10 @@ namespace Neural
 		/// <value>The id of this axon</value>
 		public Guid Id 
 		{
-			get;
+            get
+            {
+                return id;
+            }
 		}
     
 		/// <summary>

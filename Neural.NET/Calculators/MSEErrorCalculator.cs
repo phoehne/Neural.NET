@@ -88,7 +88,7 @@ namespace Neural.Calculators {
 		/// <param name="expected">The expected values</param>
 		/// <param name="actual">The actual values</param>
 		/// <returns>The contribution to Mean Squared Error</returns>
-		public double CalculateError(Dictionary<String, double> expected, Dictionary<String, double> actual) {
+		public double CalculateError(IDictionary<String, double> expected, IDictionary<String, double> actual) {
 			double result = 0.0;
         
 			foreach(string key in actual.Keys) {

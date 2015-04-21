@@ -86,7 +86,7 @@ namespace Neural.Calculators {
 		/// <param name="expected">The espected values</param>
 		/// <param name="actual">The actual values</param>
 		/// <returns>The classification error</returns>
-		public double CalculateError(Dictionary<String, double> expected, Dictionary<String, double> actual) {
+		public double CalculateError(IDictionary<String, double> expected, IDictionary<String, double> actual) {
 			double result = 0.0;
 			string expectedClass = GetClass(expected);
 			string actualClass = GetClass(actual);
@@ -118,7 +118,7 @@ namespace Neural.Calculators {
 		/// </summary>
 		/// <param name="resultSet">The result set</param>
 		/// <returns>The number of indicated classes</returns>
-		private int CountClasses(Dictionary<String, double> resultSet) {
+		private int CountClasses(IDictionary<String, double> resultSet) {
 			int result = 0;
             foreach (KeyValuePair<String, double> entry in resultSet)
             {
@@ -137,7 +137,7 @@ namespace Neural.Calculators {
 		/// </summary>
 		/// <param name="resultSet">The result set</param>
 		/// <returns>The name of the maximum valued attribute</returns>
-		private String GetClass(Dictionary<String, double> resultSet) {
+		private String GetClass(IDictionary<String, double> resultSet) {
 			//double val = System.Double.NegativeInfinity;
 			string result = "";
             foreach (KeyValuePair<String, double> entry in resultSet)

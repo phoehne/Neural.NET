@@ -1,0 +1,6 @@
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET\bin\Debug\Neural.NET.dll
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET\bin\Debug\Neural.NET.pdb
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET\bin\Debug\documentation.xml
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET\obj\Debug\Neural.NET.dll
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET\obj\Debug\Neural.NET.pdb
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET\obj\Debug\Neural.NET.csprojResolveAssemblyReference.cache

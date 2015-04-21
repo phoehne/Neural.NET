@@ -1,0 +1,7 @@
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET.Test\bin\Debug\Neural.NET.Test.dll
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET.Test\bin\Debug\Neural.NET.Test.pdb
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET.Test\bin\Debug\Neural.NET.dll
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET.Test\bin\Debug\Neural.NET.pdb
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET.Test\obj\Debug\Neural.NET.Test.csprojResolveAssemblyReference.cache
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET.Test\obj\Debug\Neural.NET.Test.dll
+C:\Users\Paul\Documents\GitHub\Neural.NET\Neural.NET.Test\obj\Debug\Neural.NET.Test.pdb

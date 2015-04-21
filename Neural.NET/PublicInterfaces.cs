@@ -105,7 +105,7 @@ namespace Neural
 		/// <param name="expected">The expected values from training</param>
 		/// <param name="actual">The actual values produced by the network</param>
 		/// <returns>The error measure</returns>
-		double CalculateError(Dictionary<String, double> expected, Dictionary<String, double> actual);    
+		double CalculateError(IDictionary<String, double> expected, IDictionary<String, double> actual);    
 		/// <summary>
 		/// If no name is provided when registering the error calculator, this will be its name.
 		/// </summary>
